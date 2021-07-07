@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Quanto vale meu carro?
 
-## Getting Started
+O objetivo é montar um produto chamado "Quanto vale meu carro?". Ele ajuda o dono de um veículo a descobrir quanto vale o seu carro.
 
-First, run the development server:
+Temos uma tela principal onde o usuário escolhe uma marca, o modelo e o ano do carro. E após essa seleção, o usuário visualiza o preço do veículo e mais algumas informações básicas, como marca, modelo do veículo, ano do veículo, preço e combustível (caso esteja disponível).
 
-```bash
-npm run dev
-# or
-yarn dev
+## Demo
+
+## Instalação
+
+Após o clone do repositório, entre no diretório do projeto e rode:
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Comandos
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Desenvolvimento 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
+```
+npm run dev
+``` 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Build para produção 
 
-## Learn More
+```
+npm build
+``` 
 
-To learn more about Next.js, take a look at the following resources:
+## Tecnologias e pacotes
+- React (Next.js)
+- Typescript
+- Context API
+- Chackra UI
+- Axios / Promises
+- React Hook Form 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Status
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+:construction: Em desenvolvimento
