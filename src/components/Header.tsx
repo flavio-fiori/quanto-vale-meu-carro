@@ -9,7 +9,7 @@ export function Header() {
             width="100%"
             backgroundColor="primary"
             paddingTop="4"
-            paddingBottom="12"            
+            paddingBottom={["12", "12", "12", "24"]}            
         >
 
             <Heading

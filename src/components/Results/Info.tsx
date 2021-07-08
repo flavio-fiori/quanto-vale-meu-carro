@@ -20,7 +20,7 @@ export function Info() {
                     textAlign="center"
                     fontWeight="300"
                 >
-                    Valor do seu carro: 
+                    Valor em média do seu carro: 
                     <Box
                         fontWeight="bold"
                         color="secondary"
