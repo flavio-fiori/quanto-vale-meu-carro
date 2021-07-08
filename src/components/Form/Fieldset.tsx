@@ -1,25 +1,25 @@
 import { useEffect, useState, FormEvent } from 'react';
-import { Flex, Text, Box, VStack, FormControl, FormLabel, Select, Button, Image } from '@chakra-ui/react';
+import { VStack, Button } from '@chakra-ui/react';
 import { FaCalculator } from 'react-icons/fa';
 
-import { useCar } from '../context/Car';
+import { useCar } from '../../context/Car';
 
 import { Field } from './Field';
 
-import { api } from '../services/api';
-import { formatToReal } from '../utils/formatData';
+import { api } from '../../services/api';
+import { formatToReal } from '../../utils/formatData';
 
 interface VersionResponse {
     versionId: string;
     version: string;
-}
+};
 
 interface Version {
     id: string;
     name: string;
-}
+};
 
-export function Form() {
+export function Fieldset() {
 
     const { changeSearch, saveCar } = useCar();
 
@@ -137,90 +137,66 @@ export function Form() {
 
     return (
 
-        <Flex
+        <VStack
             as="form"
-            flexDirection={["column", "column", "column", "row"]}
-            justifyContent={["initial","initial","initial","space-between"]}
-            onSubmit={handleSearchCar}             
+            onSubmit={handleSearchCar}  
+            width={["100%","100%","100%", "40%"]}
+            marginTop={["4", "4", "4", "0"]} 
+            spacing="4"
         >
-            <Box
-                width={["100%","100%","100%", "48%"]}
+
+            <Field
+                id="brands"
+                label="Marcas"
+                placeholder="Selecione a marca"
+                isDisabled={false}
+                options={brands}
+                onChange={setCurrentBrand}
+            />
+
+            <Field
+                id="models"
+                label="Modelos"
+                placeholder="Selecione o modelo"
+                isDisabled={currentBrand === ''}
+                options={models}
+                onChange={setCurrentModel}
+            />
+
+            <Field
+                id="years"
+                label="Modelos"
+                placeholder="Selecione o ano"
+                isDisabled={currentModel === ''}
+                options={years}
+                onChange={setCurrentYear}
+            />
+
+            <Field
+                id="versions"
+                label="Modelos"
+                placeholder="Selecione a versão"
+                isDisabled={currentYear === ''}
+                options={versions}
+                onChange={setCurrentVersion}
+            />
+
+            <Button
+                type="submit"
+                width="100%"
+                disabled={currentVersion === ''}
+                isLoading={isSubmitted}
+                loadingText="Calculando"
+                backgroundColor="secondary"
+                _hover={{
+                    backgroundColor: "primary"
+                }}
+                leftIcon={<FaCalculator/>}
+                color="white"
             >
-                <Text
-                    fontSize={["16px", "16px", "16px", "24px"]}
-                >
-                    Não sabe o valor do <Box as="strong">seu carro?</Box> Venha com a gente e descubrimos juntos! #quantoVale
-                </Text>
-
-                <Image 
-                    maxWidth="380px"
-                    marginX="auto"
-                    marginTop="8"
-                    display={["none", "none", "none", "block"]}
-                    src="images/carro-2.png" 
-                    alt="Ilustração de um carro"/>
-            </Box>
-
-            <VStack
-                width={["100%","100%","100%", "40%"]}
-                marginTop={["4", "4", "4", "0"]} 
-                spacing="4"
-            >
-
-                <Field
-                    id="brands"
-                    label="Marcas"
-                    placeholder="Selecione a marca"
-                    isDisabled={false}
-                    options={brands}
-                    onChange={setCurrentBrand}
-                />
-
-                <Field
-                    id="models"
-                    label="Modelos"
-                    placeholder="Selecione o modelo"
-                    isDisabled={currentBrand === ''}
-                    options={models}
-                    onChange={setCurrentModel}
-                />
-
-                <Field
-                    id="years"
-                    label="Modelos"
-                    placeholder="Selecione o ano"
-                    isDisabled={currentModel === ''}
-                    options={years}
-                    onChange={setCurrentYear}
-                />
-
-                <Field
-                    id="versions"
-                    label="Modelos"
-                    placeholder="Selecione a versão"
-                    isDisabled={currentYear === ''}
-                    options={versions}
-                    onChange={setCurrentVersion}
-                />
-
-                <Button
-                    type="submit"
-                    width="100%"
-                    disabled={currentVersion === ''}
-                    isLoading={isSubmitted}
-                    loadingText="Calculando"
-                    backgroundColor="secondary"
-                    _hover={{
-                        backgroundColor: "primary"
-                    }}
-                    leftIcon={<FaCalculator/>}
-                    color="white"
-                >
-                    Calcular
-                </Button>
-            </VStack>
-
-        </Flex>
+                Calcular
+            </Button>
+        </VStack>
 
     )
 

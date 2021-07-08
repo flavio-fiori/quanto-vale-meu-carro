@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import Head from 'next/head';
 
 import { useCar } from '../context/Car';
 
@@ -15,6 +16,10 @@ export default function Home() {
 
         <Fragment>
 
+            <Head>
+                <title>Quanto vale meu carro?</title>
+            </Head>
+
             <Header />
 
             <GridContainer>
@@ -24,7 +29,6 @@ export default function Home() {
                         <Form />
 
                     ) : (
-
 
                         <Results />
 

@@ -10,10 +10,9 @@ export default class MyDocument extends Document {
 
                 <Head>
 
-                    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet"/>
-                    <meta name="theme-color" content="#228855"/>
-                    <title>Quanto vale meu carro?</title>
+                    <link rel="preconnect" href="https://fonts.googleapis.com" />
+                    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet" />
+                    <meta name="theme-color" content="#228855" />
 
                 </Head>
 

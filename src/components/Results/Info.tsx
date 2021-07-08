@@ -1,56 +1,15 @@
-import { Fragment  } from 'react';
-import { Flex, Heading, Text, Divider, IconButton, Box, Table, Tbody, Th, Tr, Td} from '@chakra-ui/react';
-import { FaAngleDoubleLeft } from 'react-icons/fa';
+import { Flex, Heading, Box, Table, Tbody, Th, Tr, Td } from '@chakra-ui/react';
 
-import { useCar } from '../context/Car';
+import { useCar } from "../../context/Car";
 
-export function Results() {
+export function Info() {
 
-    const { car, changeSearch, saveCar } = useCar();
+    const { car } = useCar();
 
-    const backHome = () => {
 
-        changeSearch();
+    return(
 
-        saveCar({
-            precoMedio: '',
-            brand: '',
-            model: '',
-            modelYear: '',
-            version: ''
-        });
-
-    };
-
-    return (
-
-        <Fragment>
-
-            <Flex
-                alignItems="center"
-                justifyContent="space-between"
-            >
-
-                <IconButton
-                    onClick={backHome}
-                    aria-label="Buscar outro carro" 
-                    icon={<FaAngleDoubleLeft />} />
-
-                <Text
-                    textAlign="right"
-                    paddingLeft="2"
-                >
-                    Encontramos o valor do seu carro. 
-                    Confirar abaixo :) 
-                </Text>
-
-            </Flex>
-
-            <Divider 
-                marginY="8"
-            />
-
-            <Flex
+        <Flex
                 flexDirection={["column", "column", "column", "row"]}
                 justifyContent={["initial","initial","initial","space-between"]}
                 alignItems={["initial","initial","initial","center"]}    
@@ -96,8 +55,6 @@ export function Results() {
                 </Table>
 
             </Flex>
-
-        </Fragment>
 
     )
 
