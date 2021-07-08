@@ -1,14 +1,123 @@
 import { Flex, Text, Box, VStack, FormControl, FormLabel, Select, Button, Image } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { FaCalculator } from 'react-icons/fa';
 
+import { useCar } from '../context/Car';
+
+import { api } from '../services/api';
+import { formatToReal } from '../utils/formatData';
+
 export function Form() {
+
+    const { changeSearch, saveCar } = useCar();
+
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+    const [brands, setBrands] = useState([]);
+    const [currentBrand, setcurrentBrand] = useState<string>('');
+
+    const [models, setModels] = useState([]);
+    const [currentModel, setCurrentModel] = useState<string>('');
+
+    const [years, setYears] = useState([]);
+    const [currentYear, setCurrentYear] = useState<string>('');
+
+    const [versions, setVersions] = useState([]);
+    const [currentVersion, setCurrentVersion] = useState('');
+    
+    useEffect(() => {
+
+        api.get('brands')
+            .then(response => setBrands(response.data));
+
+    }, []);
+
+    useEffect(() => {
+
+        if(currentBrand) {
+
+            api.get(`/brands/${currentBrand}/models`)
+                .then(response => setModels(response.data))
+
+            setCurrentModel('');
+            setCurrentYear('');
+            setCurrentVersion('');
+        }
+
+    }, [currentBrand]);
+
+    useEffect(() => {
+
+        if(currentModel) {
+
+            api.get(`/brands/${currentBrand}/models/${currentModel}/years`)
+                .then(response => {
+
+                    const years = response.data;
+                    const treatedYears = years.reduce((accumulator, year) => {
+                        
+                        if(!accumulator.includes(year)) {
+                            accumulator.push(year);
+                        }
+
+                        return accumulator;
+
+                    }, []).sort((a,b) => a - b);
+
+                    console.log(treatedYears);
+
+                    setYears(treatedYears);
+
+                });
+
+            setCurrentYear('');
+            setCurrentVersion('');
+        }
+
+    }, [currentModel]);
+
+    useEffect(() => {
+
+        if(currentYear) {
+
+            api.get(`/brands/${currentBrand}/models/${currentModel}/years/${currentYear}/versions`)
+                .then(response => setVersions(response.data));
+            
+            setCurrentVersion('');
+        }
+
+    }, [currentYear]);
+
+    const handleSearchCar = async (event:any) => {
+
+        event.preventDefault();
+
+        setIsSubmitted(true);
+        
+        const response = await api.get(`/brands/${currentBrand}/models/${currentModel}/years/${currentYear}/versions/${currentVersion}`);
+        const { precoMedio, brand, model, modelYear, version } = response.data; 
+
+        setIsSubmitted(false);
+
+        changeSearch();
+
+        saveCar({
+            precoMedio: formatToReal(precoMedio), 
+            brand, 
+            model, 
+            modelYear, 
+            version
+        });        
+
+    };
 
     return (
 
         <Flex
             as="form"
             flexDirection={["column", "column", "column", "row"]}
-            justifyContent={["initial","initial","initial","space-between"]}             
+            justifyContent={["initial","initial","initial","space-between"]}
+            onSubmit={handleSearchCar}             
         >
             <Box
                 width={["100%","100%","100%", "48%"]}
@@ -33,29 +142,80 @@ export function Form() {
                 marginTop={["4", "4", "4", "0"]} 
                 spacing="4"
             >
-                <FormControl>
+                <FormControl id="brands">
                     <FormLabel>Marcas:</FormLabel>
-                    <Select placeholder="Selecione a marca"></Select>
+                    <Select 
+                        placeholder="Selecione a marca"
+                        onChange={(event) => setcurrentBrand(event.target.value)}    
+                    >
+                        {
+                            brands &&
+                            brands.map(brand => (
+                                <option key={ brand } value={ brand }>{ brand }</option>
+                            ))
+                        }
+                    </Select>
                 </FormControl>
 
-                <FormControl>
+                <FormControl 
+                    id="models" 
+                    isDisabled={currentBrand === ''}                    
+                >
                     <FormLabel>Modelos:</FormLabel>
-                    <Select placeholder="Selecione o modelo"></Select>
+                    <Select 
+                        placeholder="Selecione o modelo"
+                        onChange={(event) => setCurrentModel(event.target.value)}
+                    >
+                        {
+                            models &&
+                            models.map(model => (
+                                <option key={ model } value={ model }>{ model }</option>
+                            ))
+                        }
+                    </Select>
                 </FormControl>
 
-                <FormControl>
+                <FormControl 
+                    id="years" 
+                    isDisabled={currentModel === ''}                    
+                >
                     <FormLabel>Anos:</FormLabel>
-                    <Select placeholder="Selecione o ano"></Select>
+                    <Select 
+                        placeholder="Selecione o ano"
+                        onChange={(event) => setCurrentYear(event.target.value)}
+                    >
+                        {
+                            years &&
+                            years.map(year => (
+                                <option key={ year } value={ year }>{ year }</option>
+                            ))
+                        }
+                    </Select>
                 </FormControl>
 
-                <FormControl>
+                <FormControl 
+                    id="versions" 
+                    isDisabled={currentYear === ''}
+                >
                     <FormLabel>Versões:</FormLabel>
-                    <Select placeholder="Selecione a versão"></Select>
+                    <Select 
+                        placeholder="Selecione a versão"
+                        onChange={(event) => setCurrentVersion(event.target.value)}
+                    >
+                        {
+                            versions &&
+                            versions.map(element => (
+                                <option key={ element.versionId } value={ element.versionId }>{ element.version }</option>
+                            ))
+                        }
+                    </Select>
                 </FormControl>
 
                 <Button
+                    type="submit"
                     width="100%"
-                    isLoading={false}
+                    disabled={currentVersion === ''}
+                    isLoading={isSubmitted}
                     loadingText="Calculando"
                     backgroundColor="secondary"
                     _hover={{

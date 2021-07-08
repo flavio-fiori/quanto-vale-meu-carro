@@ -1,8 +1,25 @@
 import { Fragment } from 'react';
 import { Flex, Heading, Text, Divider, IconButton, Box, Table, Tbody, Th, Tr, Td} from '@chakra-ui/react';
-import { FaAngleDoubleLeft } from 'react-icons/fa'
+import { FaAngleDoubleLeft } from 'react-icons/fa';
+
+import { useCar } from '../context/Car';
 
 export function Results() {
+
+    const { car, changeSearch, saveCar } = useCar();
+
+    const backHome = (event: any) => {
+
+        changeSearch();
+        saveCar({
+            precoMedio: '',
+            brand: '',
+            model: '',
+            modelYear: '',
+            version: ''
+        });
+
+    }
 
     return (
 
@@ -14,6 +31,7 @@ export function Results() {
             >
 
                 <IconButton
+                    onClick={backHome}
                     aria-label="Buscar outro carro" 
                     icon={<FaAngleDoubleLeft />} />
 
@@ -47,7 +65,7 @@ export function Results() {
                         fontWeight="bold"
                         color="secondary"
                     >
-                        R$99.000,00
+                        {car.precoMedio}
                     </Box>
                 </Heading>
 
@@ -59,19 +77,19 @@ export function Results() {
                     <Tbody>
                         <Tr>
                             <Th>Marca:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.brand}</Td>
                         </Tr>
                         <Tr>
                             <Th>Modelo:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.model}</Td>
                         </Tr>
                         <Tr>
                             <Th>Ano:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.modelYear}</Td>
                         </Tr>
                         <Tr>
                             <Th>Versão:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.version}</Td>
                         </Tr>
                     </Tbody>
                 </Table>

@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 
+import { useCar } from '../context/Car';
+
 import { Header } from './../components/Header';
 import { GridContainer } from './../components/GridContainer';
 import { Form } from '../components/Form';
@@ -7,7 +9,7 @@ import { Results } from '../components/Results';
 
 export default function Home() {
 
-    const test = false;
+    const { wasSearched } = useCar();
 
     return (
 
@@ -17,7 +19,7 @@ export default function Home() {
 
             <GridContainer>
                 {
-                    test ? (
+                    !wasSearched ? (
 
                         <Form />
 
