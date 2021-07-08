@@ -30,7 +30,13 @@ export function Intro() {
 
             <IconButton
                 onClick={backHome}
-                aria-label="Buscar outro carro" 
+                aria-label="Buscar outro carro"
+                backgroundColor="secondary"
+                color="white" 
+                _hover={{
+                    backgroundColor: "secondary"
+                }}
+                borderRadius="4"
                 icon={<FaAngleDoubleLeft />} />
 
             <Text

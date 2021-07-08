@@ -3,7 +3,7 @@ export const GridContainer = {
         width: "100%",
         backgroundColor: "white",
         maxWidth: ["340px", "380px", "380px", "1280px"],
-        marginTop: "-8",
+        marginTop: ["-8", "-8", "-8", "-12"],
         marginX: "auto",
         boxShadow: "md",
         rounded: "md",
