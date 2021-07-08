@@ -1,5 +1,5 @@
+import { useEffect, useState, FormEvent } from 'react';
 import { Flex, Text, Box, VStack, FormControl, FormLabel, Select, Button, Image } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
 import { FaCalculator } from 'react-icons/fa';
 
 import { useCar } from '../context/Car';
@@ -7,23 +7,28 @@ import { useCar } from '../context/Car';
 import { api } from '../services/api';
 import { formatToReal } from '../utils/formatData';
 
+interface Version {
+    versionId: string;
+    version: string;
+}
+
 export function Form() {
 
     const { changeSearch, saveCar } = useCar();
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-    const [brands, setBrands] = useState([]);
+    const [brands, setBrands] = useState<string[]>([]);
     const [currentBrand, setcurrentBrand] = useState<string>('');
 
-    const [models, setModels] = useState([]);
+    const [models, setModels] = useState<string[]>([]);
     const [currentModel, setCurrentModel] = useState<string>('');
 
-    const [years, setYears] = useState([]);
+    const [years, setYears] = useState<string[]>([]);
     const [currentYear, setCurrentYear] = useState<string>('');
 
-    const [versions, setVersions] = useState([]);
-    const [currentVersion, setCurrentVersion] = useState('');
+    const [versions, setVersions] = useState<Version[]>([]);
+    const [currentVersion, setCurrentVersion] = useState<string>('');
     
     useEffect(() => {
 
@@ -54,7 +59,7 @@ export function Form() {
                 .then(response => {
 
                     const years = response.data;
-                    const treatedYears = years.reduce((accumulator, year) => {
+                    const treatedYears = years.reduce((accumulator:string[], year: string) => {
                         
                         if(!accumulator.includes(year)) {
                             accumulator.push(year);
@@ -62,9 +67,9 @@ export function Form() {
 
                         return accumulator;
 
-                    }, []).sort((a,b) => a - b);
+                    }, []).sort((a:number, b:number) => a - b);
 
-                    console.log(treatedYears);
+                    // console.log(treatedYears);
 
                     setYears(treatedYears);
 
@@ -74,7 +79,7 @@ export function Form() {
             setCurrentVersion('');
         }
 
-    }, [currentModel]);
+    }, [currentBrand, currentModel]);
 
     useEffect(() => {
 
@@ -86,9 +91,9 @@ export function Form() {
             setCurrentVersion('');
         }
 
-    }, [currentYear]);
+    }, [currentBrand, currentModel, currentYear]);
 
-    const handleSearchCar = async (event:any) => {
+    const handleSearchCar = async (event: FormEvent) => {
 
         event.preventDefault();
 

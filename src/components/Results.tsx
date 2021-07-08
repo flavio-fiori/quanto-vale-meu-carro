@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment  } from 'react';
 import { Flex, Heading, Text, Divider, IconButton, Box, Table, Tbody, Th, Tr, Td} from '@chakra-ui/react';
 import { FaAngleDoubleLeft } from 'react-icons/fa';
 
@@ -8,9 +8,10 @@ export function Results() {
 
     const { car, changeSearch, saveCar } = useCar();
 
-    const backHome = (event: any) => {
+    const backHome = () => {
 
         changeSearch();
+
         saveCar({
             precoMedio: '',
             brand: '',
@@ -19,7 +20,7 @@ export function Results() {
             version: ''
         });
 
-    }
+    };
 
     return (
 
