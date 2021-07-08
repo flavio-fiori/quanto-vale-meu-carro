@@ -1,3 +1,5 @@
+<img src="https://quanto-vale-meu-carro.vercel.app/images/carro-2.png" width="200"/>
+
 # Quanto vale meu carro?
 
 O objetivo é montar um produto chamado "Quanto vale meu carro?". Ele ajuda o dono de um veículo a descobrir quanto vale o seu carro.
@@ -34,7 +36,6 @@ npm build
 - Context API
 - Chackra UI
 - Axios / Promises
-- React Hook Form 
 
 ## Status
 
