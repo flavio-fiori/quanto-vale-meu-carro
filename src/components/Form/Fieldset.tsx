@@ -188,7 +188,7 @@ export function Fieldset() {
 
             <Field
                 id="versions"
-                label="Modelos"
+                label="Versão"
                 placeholder="Selecione a versão"
                 isDisabled={currentYear === ''}
                 options={versions}
