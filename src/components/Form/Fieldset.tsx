@@ -8,6 +8,7 @@ import { Field } from './Field';
 
 import { api } from '../../services/api';
 import { formatToReal } from '../../utils/formatData';
+import { showMessageError } from '../../utils/showMessageError';
 
 interface VersionResponse {
     versionId: string;
@@ -40,7 +41,8 @@ export function Fieldset() {
     useEffect(() => {
 
         api.get('brands')
-            .then(response => setBrands(response.data));
+            .then(response => setBrands(response.data))
+            .catch(error => showMessageError(error.message));
 
     }, []);
 
@@ -50,6 +52,7 @@ export function Fieldset() {
 
             api.get(`/brands/${currentBrand}/models`)
                 .then(response => setModels(response.data))
+                .catch(error => showMessageError(error.message));
 
             setCurrentModel('');
             setCurrentYear('');
@@ -80,7 +83,8 @@ export function Fieldset() {
 
                     setYears(treatedYears);
 
-                });
+                })
+                .catch(error => showMessageError(error.message));
 
             setCurrentYear('');
             setCurrentVersion('');
@@ -105,7 +109,8 @@ export function Fieldset() {
 
                     setVersions(newVersions);
 
-                });
+                })
+                .catch(error => showMessageError(error.message));
             
             setCurrentVersion('');
         }
@@ -118,21 +123,30 @@ export function Fieldset() {
 
         setIsSubmitted(true);
         
-        const response = await api.get(`/brands/${currentBrand}/models/${currentModel}/years/${currentYear}/versions/${currentVersion}`);
-        const { precoMedio, brand, model, modelYear, version } = response.data; 
+        try {
+            
+            const response = await api.get(`/brands/${currentBrand}/models/${currentModel}/years/${currentYear}/versions/${currentVersion}`);
+            
+            const { precoMedio, brand, model, modelYear, version } = response.data; 
+            
+            changeSearch();
+            setIsSubmitted(false);
+            
+            saveCar({
+                precoMedio: formatToReal(precoMedio), 
+                brand, 
+                model, 
+                modelYear, 
+                version
+            });   
 
-        setIsSubmitted(false);
+        } catch (error) {
+            
+            setIsSubmitted(false);
+            showMessageError(error.message);
 
-        changeSearch();
-
-        saveCar({
-            precoMedio: formatToReal(precoMedio), 
-            brand, 
-            model, 
-            modelYear, 
-            version
-        });        
-
+        }     
+        
     };
 
     return (
