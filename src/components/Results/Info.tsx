@@ -1,37 +1,15 @@
-import { Fragment } from 'react';
-import { Flex, Heading, Text, Divider, IconButton, Box, Table, Tbody, Th, Tr, Td} from '@chakra-ui/react';
-import { FaAngleDoubleLeft } from 'react-icons/fa'
+import { Flex, Heading, Box, Table, Tbody, Th, Tr, Td } from '@chakra-ui/react';
 
-export function Results() {
+import { useCar } from "../../context/Car";
 
-    return (
+export function Info() {
 
-        <Fragment>
+    const { car } = useCar();
 
-            <Flex
-                alignItems="center"
-                justifyContent="space-between"
-            >
 
-                <IconButton
-                    aria-label="Buscar outro carro" 
-                    icon={<FaAngleDoubleLeft />} />
+    return(
 
-                <Text
-                    textAlign="right"
-                    paddingLeft="2"
-                >
-                    Encontramos o valor do seu carro. 
-                    Confirar abaixo :) 
-                </Text>
-
-            </Flex>
-
-            <Divider 
-                marginY="8"
-            />
-
-            <Flex
+        <Flex
                 flexDirection={["column", "column", "column", "row"]}
                 justifyContent={["initial","initial","initial","space-between"]}
                 alignItems={["initial","initial","initial","center"]}    
@@ -47,7 +25,7 @@ export function Results() {
                         fontWeight="bold"
                         color="secondary"
                     >
-                        R$99.000,00
+                        {car.precoMedio}
                     </Box>
                 </Heading>
 
@@ -59,26 +37,24 @@ export function Results() {
                     <Tbody>
                         <Tr>
                             <Th>Marca:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.brand}</Td>
                         </Tr>
                         <Tr>
                             <Th>Modelo:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.model}</Td>
                         </Tr>
                         <Tr>
                             <Th>Ano:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.modelYear}</Td>
                         </Tr>
                         <Tr>
                             <Th>Versão:</Th>
-                            <Td>Lorem</Td>
+                            <Td>{car.version}</Td>
                         </Tr>
                     </Tbody>
                 </Table>
 
             </Flex>
-
-        </Fragment>
 
     )
 
