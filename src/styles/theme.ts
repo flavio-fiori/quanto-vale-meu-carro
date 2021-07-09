@@ -1,6 +1,6 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme } from "@chakra-ui/react";
 
-import { GridContainer } from './GridContainer';
+import { GridContainer } from "./GridContainer";
 
 export const theme = extendTheme({
     colors: {

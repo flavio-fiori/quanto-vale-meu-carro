@@ -1,7 +1,7 @@
 
-import { Flex } from '@chakra-ui/react';
-import { Intro } from './intro';
-import { Fieldset } from './Fieldset';
+import { Flex } from "@chakra-ui/react";
+import { Intro } from "./intro";
+import { Fieldset } from "./Fieldset";
 
 export function Form() {    
 

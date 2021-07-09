@@ -1,7 +1,7 @@
-import { Flex, IconButton, Text } from '@chakra-ui/react';
-import { FaAngleDoubleLeft } from 'react-icons/fa';
+import { Flex, IconButton, Text } from "@chakra-ui/react";
+import { FaAngleDoubleLeft } from "react-icons/fa";
 
-import { useCar } from '../../context/Car';
+import { useCar } from "./../../context/Car";
 
 export function Intro() {
 
@@ -12,11 +12,11 @@ export function Intro() {
         changeSearch();
 
         saveCar({
-            precoMedio: '',
-            brand: '',
-            model: '',
-            modelYear: '',
-            version: ''
+            precoMedio: "",
+            brand: "",
+            model: "",
+            modelYear: "",
+            version: ""
         });
 
     };
@@ -24,9 +24,9 @@ export function Intro() {
     return (
 
         <Flex
-                alignItems="center"
-                justifyContent="space-between"
-            >
+            alignItems="center"
+            justifyContent="space-between"
+        >
 
             <IconButton
                 onClick={backHome}

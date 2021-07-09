@@ -1,9 +1,9 @@
-import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
+import type { AppProps } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
 
-import { CarProvider } from './../context/Car';
+import { CarProvider } from "./../context/Car";
 
-import { theme } from './../styles/theme';
+import { theme } from "./../styles/theme";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
