@@ -1,12 +1,12 @@
-import { Text, Box, Image } from '@chakra-ui/react';
+import { Text, Box, Image } from "@chakra-ui/react";
 
 export function Intro() {
 
     return (
 
         <Box
-                width={["100%","100%","100%", "48%"]}
-            >
+            width={["100%","100%","100%", "48%"]}
+        >
             <Text
                 fontSize={["16px", "16px", "16px", "24px"]}
             >

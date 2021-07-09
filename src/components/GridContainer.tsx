@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { Flex, useStyleConfig } from '@chakra-ui/react';
+import { ReactNode } from "react";
+import { Flex, useStyleConfig } from "@chakra-ui/react";
 
 type GridContainerProps = {
     children: ReactNode;
@@ -7,7 +7,7 @@ type GridContainerProps = {
 
 export function GridContainer({ children, ...rest }: GridContainerProps) {
 
-    const styles = useStyleConfig('GridContainer');
+    const styles = useStyleConfig("GridContainer");
 
     return(
 

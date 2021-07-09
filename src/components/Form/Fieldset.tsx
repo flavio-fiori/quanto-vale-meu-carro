@@ -1,14 +1,14 @@
-import { useEffect, useState, FormEvent } from 'react';
-import { VStack, Button } from '@chakra-ui/react';
-import { FaCalculator } from 'react-icons/fa';
+import { useEffect, useState, FormEvent } from "react";
+import { VStack, Button } from "@chakra-ui/react";
+import { FaCalculator } from "react-icons/fa";
 
-import { useCar } from '../../context/Car';
+import { useCar } from "./../../context/Car";
 
-import { Field } from './Field';
+import { Field } from "./Field";
 
-import { api } from '../../services/api';
-import { formatToReal } from '../../utils/formatData';
-import { showMessageError } from '../../utils/showMessageError';
+import { api } from "./../../services/api";
+import { formatToReal } from "./../../utils/formatData";
+import { showMessageError } from "./../../utils/showMessageError";
 
 interface VersionResponse {
     versionId: string;
@@ -27,20 +27,20 @@ export function Fieldset() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const [brands, setBrands] = useState<string[]>([]);
-    const [currentBrand, setCurrentBrand] = useState<string>('');
+    const [currentBrand, setCurrentBrand] = useState<string>("");
 
     const [models, setModels] = useState<string[]>([]);
-    const [currentModel, setCurrentModel] = useState<string>('');
+    const [currentModel, setCurrentModel] = useState<string>("");
 
     const [years, setYears] = useState<string[]>([]);
-    const [currentYear, setCurrentYear] = useState<string>('');
+    const [currentYear, setCurrentYear] = useState<string>("");
 
     const [versions, setVersions] = useState<Version[]>([]);
-    const [currentVersion, setCurrentVersion] = useState<string>('');
+    const [currentVersion, setCurrentVersion] = useState<string>("");
     
     useEffect(() => {
 
-        api.get('brands')
+        api.get("brands")
             .then(response => setBrands(response.data))
             .catch(error => showMessageError(error.message));
 
@@ -54,9 +54,9 @@ export function Fieldset() {
                 .then(response => setModels(response.data))
                 .catch(error => showMessageError(error.message));
 
-            setCurrentModel('');
-            setCurrentYear('');
-            setCurrentVersion('');
+            setCurrentModel("");
+            setCurrentYear("");
+            setCurrentVersion("");
         }
 
     }, [currentBrand]);
@@ -79,15 +79,13 @@ export function Fieldset() {
 
                     }, []).sort((a:number, b:number) => a - b);
 
-                    // console.log(treatedYears);
-
                     setYears(treatedYears);
 
                 })
                 .catch(error => showMessageError(error.message));
 
-            setCurrentYear('');
-            setCurrentVersion('');
+            setCurrentYear("");
+            setCurrentVersion("");
         }
 
     }, [currentBrand, currentModel]);
@@ -112,7 +110,7 @@ export function Fieldset() {
                 })
                 .catch(error => showMessageError(error.message));
             
-            setCurrentVersion('');
+            setCurrentVersion("");
         }
 
     }, [currentBrand, currentModel, currentYear]);
@@ -172,7 +170,7 @@ export function Fieldset() {
                 id="models"
                 label="Modelos"
                 placeholder="Selecione o modelo"
-                isDisabled={currentBrand === ''}
+                isDisabled={currentBrand === ""}
                 options={models}
                 onChange={setCurrentModel}
             />
@@ -181,7 +179,7 @@ export function Fieldset() {
                 id="years"
                 label="Ano(s)"
                 placeholder="Selecione o ano"
-                isDisabled={currentModel === ''}
+                isDisabled={currentModel === ""}
                 options={years}
                 onChange={setCurrentYear}
             />
@@ -190,7 +188,7 @@ export function Fieldset() {
                 id="versions"
                 label="Versão"
                 placeholder="Selecione a versão"
-                isDisabled={currentYear === ''}
+                isDisabled={currentYear === ""}
                 options={versions}
                 onChange={setCurrentVersion}
             />
@@ -198,7 +196,7 @@ export function Fieldset() {
             <Button
                 type="submit"
                 width="100%"
-                disabled={currentVersion === ''}
+                disabled={currentVersion === ""}
                 isLoading={isSubmitted}
                 loadingText="Calculando"
                 backgroundColor="secondary"
@@ -210,6 +208,7 @@ export function Fieldset() {
             >
                 Calcular
             </Button>
+            
         </VStack>
 
     )

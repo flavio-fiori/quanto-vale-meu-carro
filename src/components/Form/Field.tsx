@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 
 interface OptionsObject {
     id: string;
@@ -18,11 +18,11 @@ export function Field({ id, label, placeholder, isDisabled, options, onChange }:
 
     const newOptions = options.map(option => {
 
-        if(typeof option === 'string') {
+        if(typeof option === "string") {
 
             return (<option key={option} value={option}>{option}</option>)
 
-        } else if(typeof option === 'object') {
+        } else if(typeof option === "object") {
 
             return (<option key={option.id} value={option.id}>{option.name}</option>)
 
@@ -33,7 +33,9 @@ export function Field({ id, label, placeholder, isDisabled, options, onChange }:
     return(
 
         <FormControl id={ id } isDisabled={ isDisabled }>
+
             <FormLabel>{ label }:</FormLabel>
+
             <Select 
                 placeholder={ placeholder }
                 onChange={onChange ? (event) => onChange(event.target.value) : () => false }    
@@ -42,6 +44,7 @@ export function Field({ id, label, placeholder, isDisabled, options, onChange }:
                 { newOptions }
 
             </Select>
+            
         </FormControl>
 
     )

@@ -25,11 +25,11 @@ export function CarProvider({ children }: CarProviderProps) {
 
     const [wasSearched, setWasSearched] = useState<boolean>(false);
     const [car, setCar] = useState<Car>({
-        precoMedio: '',
-        brand: '',
-        model: '',
-        modelYear: '',
-        version: ''
+        precoMedio: "",
+        brand: "",
+        model: "",
+        modelYear: "",
+        version: ""
     });
 
     function changeSearch() {
